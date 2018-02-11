@@ -1,0 +1,131 @@
+* { /* Set default box sizing and reset body margins and padding */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body { /* Set font-family to sans-serif fonts */
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+header { /* Make header text 75% larger, center it, and give it vertical margins */
+  font-size: 1.75em;
+  text-align: center;
+  margin: 10px 0 25px 0;
+}
+
+/* Acting as the container, center it and give it 90% width (provides
+   spacing to the left & right of browser window) */
+div.menu-categories {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Inside the div.menu-categories container are three section elements
+   where the grid framework from lecture 24 is applied, the width
+   styles are below (only included the classes needed, and added another
+   set of them with the "sm" designation for the smallest view size) */
+
+/* Inside each section is a div.menu-category that has margins such that
+   the space between those divs will equal 15px (same as bottom margin)
+   so the spacing will look equal on all the sides; the text is aligned
+   right to assist in the relative positioning of the food type div inside */
+
+/* Looked at w3schools HTML color names page to get the colors close to
+   the assignment mockup: */
+.menu-category {
+  position: relative;
+  background-color: lightgrey;
+  margin-bottom: 15px;
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+  text-align: right;
+  border: solid 3px black;
+}
+
+/* Set the background color of the food type divs: */
+.menu-category div#menu-chicken {
+  background-color: pink;
+}
+.menu-category div#menu-beef {
+  background-color: tomato;
+  color: white;
+}
+.menu-category div#menu-sushi {
+  background-color: wheat;
+}
+
+/* Food type divs: border size specified so top & right relative offsets would absorb
+   it (could also have provided different border widths for each side); positioned at
+   the top right corner of the menu category box; set width relative to font size for
+   consistency in width; vertical padding; and a small bottom/left margin value
+   (since it's relative positioned, the paragraph will honor the margin); font size
+   set for 25% larger than normal, and the text inside should be centered. */
+.menu-category > div {
+  border: solid 3px black;
+  display: inline-block;
+  position: relative;
+  top: -3px;
+  right: -3px;
+  padding: 5px 0px;
+  margin: 0px 0px 5px 5px;
+  font-weight: bold;
+  font-size: 1.25em;
+  width: 5.5em;
+  text-align: center;
+}
+/* Since the text alignment was adjusted for positioning the food type div, set
+   it back to left for the paragraph, and give it some padding (except at the top
+   since it has the food type div margin there) */
+.menu-category p {
+  text-align: left;
+  padding: 0 10px 10px 10px;
+}
+
+/* Assignment stated we could use the simple responsive framework from lecture 24
+   as a starting point - CSS for the responsive framework pasted below inside media
+   sections that define the different screen sizes we want to change for */
+
+@media (min-width: 992px) {
+  .col-lg-1, .col-lg-4 {
+    float: left;
+    border: none;
+  }
+  .col-lg-1 {
+    width: 8.33%;
+  }
+  .col-lg-4 {
+    width: 33.33%;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .col-md-1, .col-md-6, .col-md-12 {
+    float: left;
+    border: none;
+  }
+  .col-md-1 {
+    width: 8.33%;
+  }
+  .col-md-6 {
+    width: 50%;
+  }
+  .col-md-12 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .col-sm-1, .col-sm-12 {
+    float: left;
+    border: none;
+  }
+  .col-sm-1 {
+    width: 8.33%;
+  }
+  .col-sm-12 {
+    width: 100%;
+  }
+}
+
