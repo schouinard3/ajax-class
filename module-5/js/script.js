@@ -14,6 +14,7 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 var dc = {};
 
 var homeHtmlUrl = "snippets/home-snippet.html";
+var aboutHtmlUrl = "snippets/about-snippet.html";
 var allCategoriesUrl = "https://davids-restaurant.herokuapp.com/categories.json";
 var categoriesTitleHtml = "snippets/categories-title-snippet.html";
 var categoryHtml = "snippets/category-snippet.html";
@@ -49,12 +50,35 @@ var switchMenuToActive = function () {
   var classes = document.querySelector("#navHomeButton").className;
   classes = classes.replace(new RegExp("active", "g"), "");
   document.querySelector("#navHomeButton").className = classes;
+  // Remove 'active' from about button
+  var classes = document.querySelector("#navAboutButton").className;
+  classes = classes.replace(new RegExp("active", "g"), "");
+  document.querySelector("#navAboutButton").className = classes;
 
   // Add 'active' to menu button if not already there
   classes = document.querySelector("#navMenuButton").className;
   if (classes.indexOf("active") === -1) {
     classes += " active";
     document.querySelector("#navMenuButton").className = classes;
+  }
+};
+
+// Remove the class 'active' from home and switch to Menu button
+var switchAboutToActive = function () {
+  // Remove 'active' from home button
+  var classes = document.querySelector("#navHomeButton").className;
+  classes = classes.replace(new RegExp("active", "g"), "");
+  document.querySelector("#navHomeButton").className = classes;
+  // Remove 'active' from menu button
+  var classes = document.querySelector("#navMenuButton").className;
+  classes = classes.replace(new RegExp("active", "g"), "");
+  document.querySelector("#navMenuButton").className = classes;
+
+  // Add 'active' to menu button if not already there
+  classes = document.querySelector("#navAboutButton").className;
+  if (classes.indexOf("active") === -1) {
+    classes += " active";
+    document.querySelector("#navAboutButton").className = classes;
   }
 };
 
@@ -148,6 +172,15 @@ dc.loadMenuCategories = function () {
     buildAndShowCategoriesHTML);
 };
 
+// Load the about view
+dc.loadAboutPage = function () {
+  showLoading("#main-content");
+  $ajaxUtils.sendGetRequest(
+    aboutHtmlUrl,
+    buildAndShowAboutHTML,
+    false);
+};
+
 
 // Load the menu items view
 // 'categoryShort' is a short_name for a category
@@ -184,6 +217,33 @@ function buildAndShowCategoriesHTML (categories) {
     false);
 }
 
+// Builds HTML for the categories page based on the data
+// from the server
+function buildAndShowAboutHTML(aboutHtml) {
+    switchAboutToActive();
+    var stars = getRandomStarRating();
+    insertHtml("#main-content", aboutHtml);
+    fillInStarRating(stars);
+}
+
+function getRandomStarRating() {
+    return Math.floor(Math.random() * 5)+1;
+}
+
+function fillInStarRating(stars) {
+    for (var i = 1; i <= 5; i++) {
+        var starSpan = document.querySelector('#aboutStarRating span:nth-of-type('+i+')');
+        var classes = starSpan.className;
+        if (i <= stars) {
+            classes += " fa fa-star";
+        } else {
+            classes += " fa fa-star-o";
+        }
+        starSpan.className = classes;
+    }
+    var ratingSpan = document.querySelector('span#starRatingText');
+    ratingSpan.textContent = " "+stars+"-star rating";
+}
 
 // Using categories data and snippets html
 // build categories view HTML to be inserted into page
