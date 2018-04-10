@@ -13,7 +13,6 @@
         var controller = this;
 
         controller.narrowMenuItems = function() {
-            console.log('narrowMenuItems called, searchTerm is', controller.searchTerm);
             var promise = MenuMatchService.getMatchedMenuItems(controller.searchTerm);
             promise.then(function(foundItems) {
                 controller.found = foundItems;
@@ -52,7 +51,6 @@
         var service = this;
 
         service.getMatchedMenuItems = function(searchTerm) {
-            console.log('getMatchedMenuItems called with term:', searchTerm);
             // Use $http to get the list of all menu items
             return $http({
                 url: MenuItemsUrl,
