@@ -1,0 +1,22 @@
+<table class="clear-both table table-striped" ng-if="foundItems.foundItems.length > 0">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th></th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in foundItems.foundItems">
+            <td>{{ item.short_name }}. {{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                <button ng-click="foundItems.onRemove({index: $index});" class="btn btn-danger btn-sm">
+                    Don't want this one!
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="clear-both" ng-if="foundItems.foundItems.length === 0">
+    <strong class="text-danger">Nothing Found</strong>
+</div>
