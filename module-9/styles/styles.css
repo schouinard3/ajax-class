@@ -1,0 +1,27 @@
+h1 {
+    margin-left: 25px;
+}
+
+ul.category-list {
+    list-style-type: none;
+    display: block;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+ul.category-list li {
+    display: inline-block;
+    float: left;
+    margin: 2px;
+}
+ul.category-list li:hover {
+    cursor: pointer;
+}
+
+div.float-spacer {
+    margin-bottom: 25px;
+    clear: both;
+}
+
+ul.item-list {
+    list-style-type: circle;
+}
