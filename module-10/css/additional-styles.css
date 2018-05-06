@@ -1,0 +1,30 @@
+div.container#signup div.form-error {
+    /* Vertical Alignment Fix */
+    margin-top: 7px;
+    color: red;
+}
+
+div.container#signup span.form-submitted {
+    color: green;
+    display: inline-block;
+    margin-left: 25px;
+    vertical-align: middle
+}
+
+div.container#signup .ng-touched.ng-valid {
+    border: solid 2px green;
+}
+div.container#signup .ng-touched.ng-invalid {
+    /*
+     * Tried using the bootstrap color for *-danger
+     * classes but it was too light against the purple
+     */
+    border: solid 2px red;
+}
+
+div.container#userinfo span.user-label {
+    font-weight: bold;
+    font-size: 1.1em;
+    display: inline-block;
+    margin-right: 10px;
+}

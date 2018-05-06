@@ -40,6 +40,38 @@ function routeConfig ($stateProvider) {
           return MenuService.getMenuItems($stateParams.category);
         }]
       }
+    })
+    .state('public.signup', {
+        url: '/signup',
+        templateUrl: 'src/public/signup.html',
+        controller: 'SignupController',
+        controllerAs: 'signupCtrl',
+        resolve: {}
+    })
+    .state('public.myinfo', {
+        url: '/myinfo',
+        templateUrl: 'src/public/userinfo.html',
+        controller: 'UserInfoController',
+        controllerAs: 'userInfoCtrl',
+        resolve: {
+            userInfo: ['UserInfoService', function(UserInfoService) {
+                return UserInfoService.getUserInfo();
+            }],
+            menuItem: ['$http', 'RestaurantServerUrl', 'UserInfoService', function($http, RestaurantServerUrl, UserInfoService) {
+                var userInfo = UserInfoService.getUserInfo();
+                if (!userInfo || !userInfo.dish) {
+                    return undefined;
+                }
+
+                var dish = userInfo.dish;
+                return $http({
+                    url: RestaurantServerUrl+"/menu_items/"+dish+".json",
+                    method: 'GET'
+                }).then(function(response) {
+                    return response.data;
+                });
+            }]
+        }
     });
 }
 })();

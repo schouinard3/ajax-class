@@ -1,0 +1,123 @@
+<div class="container" id="signup">
+    <h2>Sign Up For Newsletter</h2>
+
+    <form name="signupForm" novalidate class="form-horizontal">
+        <div class="form-group">
+            <label for="signup-firstname" class="col-sm-2 control-label">
+                First Name
+            </label>
+            <div class="col-sm-5">
+                <input type="text" name="firstName" id="signup-firstname"
+                    class="form-control"
+                    placeholder="First Name"
+                    ng-model="signupCtrl.user.firstName"
+                    required
+                    minlength="3"
+                    ng-maxlength="15">
+            </div>
+            <div class="col-sm-5 form-error">
+                <span ng-if="(signupForm.firstName.$error.minlength || signupForm.firstName.$error.required) && signupForm.firstName.$touched">
+                    First Name must be at least 3 characters long.
+                </span>
+                <span ng-if="signupForm.firstName.$error.maxlength && signupForm.firstName.$touched">
+                    First Name cannot be longer than 15 characters.
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="signup-lastname" class="col-sm-2 control-label">
+                Last Name
+            </label>
+            <div class="col-sm-5">
+                <input type="text" name="lastName" id="signup-lastname"
+                    class="form-control"
+                    placeholder="Last Name"
+                    ng-model="signupCtrl.user.lastName"
+                    required
+                    minlength="3"
+                    ng-maxlength="15">
+            </div>
+            <div class="col-sm-5 form-error">
+                <span ng-if="(signupForm.lastName.$error.minlength || signupForm.lastName.$error.required) && signupForm.lastName.$touched">
+                    Last Name must be at least 3 characters long.
+                </span>
+                <span ng-if="signupForm.lastName.$error.maxlength && signupForm.lastName.$touched">
+                    Last Name cannot be longer than 15 characters.
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="signup-email" class="col-sm-2 control-label">
+                E-mail Address
+            </label>
+            <div class="col-sm-5">
+                <input type="email" name="email" id="signup-email"
+                    class="form-control"
+                    placeholder="E-mail Address"
+                    ng-model="signupCtrl.user.email"
+                    required>
+            </div>
+            <div class="col-sm-5 form-error">
+                <span ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+                    Must be valid e-mail (handle@domain format).
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="signup-phone" class="col-sm-2 control-label">
+                Phone Number
+            </label>
+            <div class="col-sm-5">
+                <input type="text" name="phone" id="signup-phone"
+                    class="form-control"
+                    placeholder="Phone Number (format: ###-###-####)"
+                    required
+                    ng-model="signupCtrl.user.phone"
+                    pattern="(\d{3})-(\d{3})-(\d{4})">
+            </div>
+            <div class="col-sm-5 form-error">
+                <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+                    Phone number must match format: ###-###-####
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="signup-dish" class="col-sm-2 control-label">
+                Favorite Dish
+            </label>
+            <div class="col-sm-5">
+                <input type="text" name="dish" id="signup-dish"
+                    class="form-control"
+                    placeholder="Dish Number / Short Name"
+                    required
+                    ng-maxlength="5"
+                    ng-model="signupCtrl.user.dish"
+                    validate-menu-shortname>
+            </div>
+            <div class="col-sm-5 form-error">
+                <span ng-if="signupForm.dish.$error.required && signupForm.dish.$touched">
+                    Favorite dish is required.
+                </span>
+                <span ng-if="signupForm.dish.$error.maxlength && signupForm.dish.$touched">
+                    Menu number cannot be longer than 5 characters.
+                </span>
+                <span ng-if="signupForm.dish.$invalid && signupForm.dish.$touched && !(signupForm.dish.$error.required || signupForm.dish.$error.maxlength)">
+                    No such menu number exists.
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default"
+                        ng-disabled="signupForm.$invalid"
+                        ng-click="signupCtrl.submit()">
+                    <strong>Sign Up!</strong>
+                </button>
+                <span class="form-submitted" ng-if="signupCtrl.submitted">
+                    Your information has been saved.  <a ui-sref="public.myinfo">View It Now</a>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
